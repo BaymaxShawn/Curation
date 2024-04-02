@@ -1,148 +1,9 @@
-// import "./App.css";
-// import { ethers } from "ethers";
-// import { useState, useEffect } from "react";
-// import Header from "./components/Header";
-// import usdtAbi from "./abi/usdt.json";
-// import curateAbi from "./abi/curate.json";
-
-// function App() {
-//   const [account, setAccount] = useState("");
-//   const [signer, setSigner] = useState(null);
-//   const [eventLogs, setEventLogs] = useState([]);
-//   const [btnHide, setBtnHide] = useState(false);
-
-//   const listenToEvents = () => {
-//     //const contract = new ethers.Contract('0x94b008aA00579c1307B0EF2c499aD98a8ce58e58',usdtAbi, signer);
-//     const contract = new ethers.Contract('0x5edebbdae7B5C79a69AaCF7873796bb1Ec664DB8',curateAbi, signer);
-
-//     // Listen for all Transfer events
-//     // contract.on("Transfer", (from, to, tokenId,event) => {
-//     //   let data = {
-//     //     from,
-//     //     to,
-//     //     tokenId: tokenId.toString(),
-//     //     event,
-//     //   };
-//     //   setEventLogs((oldState) => [...oldState, data]);
-//     // });
-
-//     // Listen for all Approval events
-//     // contract.on("Approval", ( owner, spender, tokenId, event) => {
-//     //   let data = {
-//     //     owner,
-//     //     spender,
-//     //     tokenId: tokenId.toString(),
-//     //     event,
-//     //   };
-//     //   setEventLogs((oldState) => [...oldState, data]);
-//     // });
-
-
-//     // Listen for Curation events
-//     contract.on('Curation(address,address,address,string,uint256)', (from, to, token, uri, amount, event) => {
-//       console.log('Received Curation event with token');
-//       let data = {
-//         from,
-//         to,
-//         token,
-//         uri: uri.toString(),
-//         amount,
-//         event,
-//       };
-//       setEventLogs((oldState) => [...oldState, data]);
-//     });
-    
-//     contract.on('Curation(address,address,string,uint256)', (from, to, uri, amount, event) => {
-//       console.log('Received Curation event without token');
-//       let data = {
-//         from,
-//         to,
-//         uri: uri.toString(),
-//         amount,
-//         event,
-//       };
-//       setEventLogs((oldState) => [...oldState, data]);
-//     });
-//     console.log('Listening for Curation events...');
-
-//     setBtnHide(true);
-//   };
-
-
-//   const connect = async () => {
-//     if (typeof window.ethereum !== "undefined") {
-//       const accounts = await window.ethereum.request({
-//         method: "eth_requestAccounts",
-//       });
-//       const provider = new ethers.providers.Web3Provider(window.ethereum);
-//       const signer = provider.getSigner();
-//       setSigner(signer);
-//       setAccount(accounts[0]);
-//       listenToEvents();
-//     } else {
-//       console.log("Please install metamask.");
-//     }
-//   };
-
-//   useEffect(() => {
-//     connect();
-//   }, []);
-
-//   return (
-//     <div className="page">
-//       <Header connect={connect} account={account} />
-//       <div className="main">
-//         <br />
-//         <button
-//          style={{ display: btnHide ? "none" : null }}
-//           className="button"
-//           onClick={() => listenToEvents()}
-//         >
-//           Get Event
-//         </button>
-//         {eventLogs.reverse().map((event, index) => {
-//           return (
-//             // <div key={index} className="container">
-//             //   <p>From: {event.from}</p>
-//             //   <p>{'===>'}</p>
-//             //   <p>To: {event.to}</p>
-//             //   <p>TokenId: {event.tokenId}</p>
-//             // </div>
-
-//             // <div key={index} className="container">
-//             //   <p>From: {event.owner}</p>
-//             //   <p>{'===>'}</p>
-//             //   <p>To: {event.spender}</p>
-//             //   <p>TokenId: {event.tokenId}</p>
-//             // </div>
-            
-
-//             <div key={index} className="container">
-//               <p>From: {event.from}</p>
-//               <p>{'===>'}</p>
-//               <p>To: {event.to}</p>
-//               <p>Amount: {event.amount}</p>
-//             </div>
-
-
-//           )
-//         }
-//       )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-
-
 import "./App.css";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import curateAbi from "./abi/curate.json";
+// import usdtAbi from "./abi/usdt.json";
 
 function App() {
   const [account, setAccount] = useState("");
@@ -153,10 +14,10 @@ function App() {
 
 
   const listenToEvents = () => {
-    // if (!signer) return;
+    if (!signer) return;
 
-    // const provider = signer.provider;
-    // if (!provider) return;
+    const provider = signer.provider;
+    if (!provider) return;
 
     const contract = new ethers.Contract('0x5edebbdae7B5C79a69AaCF7873796bb1Ec664DB8', curateAbi, signer);
 
